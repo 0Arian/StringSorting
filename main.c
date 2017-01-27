@@ -27,7 +27,6 @@ char* GetRidOfShit(char *argv){
     while(iterator < strlen(copy)){
         if(!(copy[iterator]>='a' && copy[iterator]<='z') && !(copy[iterator]>='A' && copy[iterator]<='Z'))
             copy[iterator] = ' ';
-
         iterator++;
 
     }
@@ -36,13 +35,32 @@ char* GetRidOfShit(char *argv){
 }
 
 void Sort(char *RD){
-    int i = 0;
-    char *sorted = (char*) malloc(strlen(RD) + 1);
-    char *token = strtok(RD, " ");
-    printf("STRING: %s\n", token);
-    head->data = token;
+    int i = 0, beg = 0, end = 0;
+    node *ptr = NULL;
+    char *copy = strdup(RD);
+    printf("STRING: %s\n", RD);
+    if(RD == NULL){
+        fprintf(stderr, "No alphabetic characters detected.\n");
+        return;
+    }
 
-    while(strlen(RD) > i){
+    while(i < strlen(copy)){
+        while(copy[i] == ' ' && i < strlen(copy)){
+            i++;
+        }
+        beg = i;
+        while(copy[i] != ' ' && i < strlen(copy)){
+            i++;
+        }
+        end = i;
+        if(head->data == NULL){
+            head->data = (char*) malloc(end-beg + 1);
+            strncpy(head->data, copy + beg, end-beg);
+            head->data[end-beg + 1] = '\0';
+            ptr = head->next;
+        }
+        printf("HERE: %s\n", head->data);
+
         printf("Value: %d\n", RD[i]);
         i++;
     }
@@ -54,6 +72,7 @@ int main(int argc, char** argv){
     if(Input_Validator(argc, argv) == 1){
         return -1;
     } else {
+        head = malloc(sizeof(argv[1]));
         Sort(GetRidOfShit(argv[1]));
     }
 
