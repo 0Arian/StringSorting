@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Create a linked list structure.
 typedef struct node{
     char* data;
     struct node *next;
@@ -11,16 +12,18 @@ node *head = NULL;
 
 //Checks for invalid input, such as not enough parameters, and a NULL input.
 int Input_Validator(int argc, char **argv){
+    //Checks to make sure there are enough parameters, and if there is valid input.
     if(argc != 2){
-        fprintf(stderr, "ERROR: Not enough parameters entered.\n");
+        fprintf(stderr, "ERROR: Invalid number of parameters entered.\n");
         return 1;
     } else if(strlen(argv[1]) == 0){
-        fprintf(stderr, "ERROR: There was no input Alphabetize\n");
+        fprintf(stderr, "WARNING: There was no input to Alphabetize\n");
         return 1;
     }
 
     return 0;
 }
+
 //Gets rid of all the garbage delimiters in the input, and replaces them with a consistent
 // ' ' for clarity.
 char* GetRidOfShit(char *argv){
@@ -36,6 +39,7 @@ char* GetRidOfShit(char *argv){
     //printf("CLEAN: %s\n", copy);
     return copy;
 }
+
 //Compares str1 to str2. If a negative number is returned, str1 is before str2
 //alphabetically. If a positive number is returned, str2 comes before str1 alphabetically.
 //If a 0 is returned, they are equal.
@@ -48,13 +52,12 @@ int Compare(char* str1, char* str2){
             return 1;
         }
     }
-    //printf("NUM: %d\n", (str1[i] - str2[i]));
+
     return str1[i] - str2[i];
 }
 
-/*
- * Our sorting method - It will use the compareto function we made a bunch of times
- */
+//Sorting algorithm. This takes the delimiter ' ', and creates a linked list of all words
+//while sorting at the same time.
 void Sort(char *RD){
     int i = 0, beg = 0, end = 0, cont = 0;
     node *ptr = NULL;
@@ -62,7 +65,7 @@ void Sort(char *RD){
     char* word = (char*) malloc(sizeof(char));
     //printf("STRING: %s\n", RD);
     if(RD == NULL){
-        fprintf(stderr, "No alphabetic characters detected.\n");
+        fprintf(stderr, "WARNING: No alphabetic characters detected.\n");
         return;
     }
 
@@ -136,20 +139,26 @@ void Sort(char *RD){
         }
         i++;
     }
+    ptr = head;
     while(head != NULL){
         printf("%s\n", head->data);
         head = head->next;
+        free(ptr);
+        ptr = head;
     }
+    free(word);
+    free(copy);
     return;
 }
 
 int main(int argc, char** argv){
+    //Checks for valid input, if it is not valid an error or warning is returned.
     if(Input_Validator(argc, argv) == 1){
         return -1;
     } else {
-        head = malloc(sizeof(argv[1]));
+        head = malloc(sizeof(argv[1]) + 1);
         Sort(GetRidOfShit(argv[1]));
     }
-    //printf("Hello world!\n");
+
     return 0;
 }
