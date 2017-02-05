@@ -52,12 +52,22 @@ int Compare(char* str1, char* str2){
             return 1;
         }
     }
+<<<<<<< HEAD
 
     return str1[i] - str2[i];
 }
 
 //Sorting algorithm. This takes the delimiter ' ', and creates a linked list of all words
 //while sorting at the same time.
+=======
+    //printf("NUM: %d\n", (str1[i] - str2[i]));
+    return str1[i] - str2[i];
+}
+
+/*
+ * Our sorting method - It will use the compareto function we made a bunch of times
+ */
+>>>>>>> 9fe5c741e93eec7a744a4f7629c5c0ae78def5fd
 void Sort(char *RD){
     int i = 0, beg = 0, end = 0, cont = 0;
     node *ptr = NULL;
@@ -152,13 +162,20 @@ void Sort(char *RD){
 }
 
 int main(int argc, char** argv){
+<<<<<<< HEAD
     //Checks for valid input, if it is not valid an error or warning is returned.
+=======
+>>>>>>> 9fe5c741e93eec7a744a4f7629c5c0ae78def5fd
     if(Input_Validator(argc, argv) == 1){
         return -1;
     } else {
         head = malloc(sizeof(argv[1]) + 1);
         Sort(GetRidOfShit(argv[1]));
     }
+<<<<<<< HEAD
 
+=======
+    //printf("Hello world!\n");
+>>>>>>> 9fe5c741e93eec7a744a4f7629c5c0ae78def5fd
     return 0;
 }
