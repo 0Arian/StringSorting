@@ -63,13 +63,15 @@ void Sort(char *RD){
     node *ptr = NULL;
     char *copy = strdup(RD);
     char* word = (char*) malloc(sizeof(char));
-    //printf("STRING: %s\n", RD);
+    //Null Check for string
     if(RD == NULL){
         fprintf(stderr, "WARNING: No alphabetic characters detected.\n");
         return;
     }
 
+    //Looping through all characters
     while(i < strlen(copy)){
+        //Move through all non-characters
         while(copy[i] == ' ' && i < strlen(copy)){
             i++;
         }
@@ -78,20 +80,22 @@ void Sort(char *RD){
             i++;
         }
         end = i;
+        //If there isn't a word in the linkest list yet
         if(head->data == NULL){
             head->data = (char*) malloc(sizeof(char) * (end-beg + 1));
             strncpy(head->data, copy + beg, end-beg);
             head->data[end-beg + 1] = '\0';
             ptr = head->next;
-            //printf("WORD: %s\n", head->data);
-        } else{
+        } 
+        //Now we just insert into the linked list sorted, no need to sort it afterwards
+        else{
             word = malloc(sizeof(char) * (end-beg + 1));
             strncpy(word, copy + beg, end-beg);
             word[end-beg] = '\0';
             ptr = head;
             cont = 1;
-            //printf("WORD: %s\n", word);
             if(ptr->next == NULL){
+                //Comparison outlets
                 if(Compare(word, ptr->data) > 0){
                     ptr->next = malloc(sizeof(node) + strlen(word) + 1);
                     ptr->next->data = (char*) malloc(sizeof(char) * strlen(word) + 1);
@@ -106,9 +110,9 @@ void Sort(char *RD){
                     head->next->data = (char*) malloc(sizeof(char) * strlen(temp) + 1);
                     head->next->data = temp;
                     head->next->next = NULL;
-                    //printf("NEW-HEAD: %s; OLD-HEAD: %s\n", head->data, head->next->data);
                 }
             }else{
+                //No More comparison outlets, just go through THEN compare the words!
             while(ptr != NULL && cont == 1){
                 if(Compare(word, ptr->data) <= 0){
                     ptr = malloc(sizeof(node) + strlen(word) + 1);
@@ -140,12 +144,14 @@ void Sort(char *RD){
         i++;
     }
     ptr = head;
+    //Looping through all our values and freeing them as we insert
     while(head != NULL){
         printf("%s\n", head->data);
         head = head->next;
         free(ptr);
         ptr = head;
     }
+    //Freeing everything that is left
     free(word);
     free(copy);
     return;
@@ -155,7 +161,9 @@ int main(int argc, char** argv){
     //Checks for valid input, if it is not valid an error or warning is returned.
     if(Input_Validator(argc, argv) == 1){
         return -1;
-    } else {
+    }
+    //Anti-Error start off the linked list and start going through all the characters and printing the words in sorted format
+    else {
         head = malloc(sizeof(argv[1]) + 1);
         Sort(GetRidOfShit(argv[1]));
     }
