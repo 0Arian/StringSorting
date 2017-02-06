@@ -1,0 +1,119 @@
+CASE 1
+___________________________
+INPUT:
+./pointersorter "Oh Yeah || Binary || &&&&& 5x001x3 || ac"
+OUTPUT:
+Oh
+Yeah
+ac
+x
+x
+
+CASE 2
+___________________________
+INPUT:
+./pointersorter "as df df df df df df df df"
+OUTPUT:
+as
+df
+df
+df
+df
+df
+df
+df
+df
+
+CASE 3
+___________________________
+INPUT:
+./pointersorter "The best website in the world is https://www.google.com. It will take you everywhere Search : https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=copycat : https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=copycat Search : https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=ice%20cream... NICK"
+OUTPUT:
+NICK
+best
+chrome
+chrome
+chrome
+com
+com
+com
+com
+copycat
+copycat
+cream
+espv
+espv
+espv
+everywhere
+google
+google
+google
+google
+https
+https
+https
+https
+ice
+ie
+ie
+ie
+in
+instant
+instant
+instant
+ion
+ion
+ion
+is
+It
+q
+q
+q
+Search
+Search
+sourceid
+sourceid
+sourceidre
+take
+The
+the
+UTF
+UTF
+UTF
+webhp
+webhp
+webhp
+website
+will
+world
+www
+www
+www
+www
+you
+
+
+CASE 4
+___________________________
+INPUT:
+./pointersorter "aand, aAnd, Aand, AAnd"
+OUTPUT:
+AAnd
+Aand
+aAnd
+aand
+
+CASE 5
+___________________________
+INPUT:
+./pointersorter ""
+OUTPUT:
+WARNING: There was no input to Alphabetize
+
+CASE 6
+___________________________
+INPUT:
+./pointersorter 
+OUTPUT:
+ERROR: Invalid number of parameters entered.
+
